@@ -6,10 +6,10 @@ using namespace std;
 
 Node::Node(Student* student) {
 	this->student = student;
-	this->next = NULL;
+	this->next = NULL; //Sets next as NULL until a pointer is assigned.
 }
 
-Node::~Node() {
+Node::~Node() { //Makes sure that the destructor does not delete a NULL.
 	if (student) {
 		delete student;
 	}
