@@ -2,6 +2,8 @@
 #include <iostream>
 #include "student.h"
 
+//Emma Shu, 12/13/2019: The header file of the linked list nodes.
+
 using namespace std;
 
 class Node {
