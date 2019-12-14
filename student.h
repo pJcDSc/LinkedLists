@@ -5,7 +5,12 @@ using namespace std;
 
 class Student {
 	public:
-		Student(char* name, int id, float gpa);
+		Student(char* firstName, char* secondName, int id, float gpa);
 		virtual ~Student();
-
-		
+		void print();
+	private:
+		char* firstName;
+		char* secondName;
+		int id;
+		float gpa;
+};		

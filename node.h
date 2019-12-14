@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "student.h"
 
 using namespace std;
 
@@ -12,4 +13,5 @@ class Node {
 		Student* getStudent();
 	private:
 		Student* student;
+		Node* next;
 };
