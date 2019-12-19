@@ -101,22 +101,29 @@ void del(Node* &head) {
 }
 
 bool delNode(Node* &head, int id) {
+  cout << "new" << endl;
+  cout << head << endl;
+  cout << head -> getNext() << endl;
+						
+  //only if list is empty
   if (head == NULL) {
     return false;
   }
+  //only if actual head contains student to delete
   if (head -> getStudent() -> getId() == id) {
-    //Node* temp = head;
+    Node* temp = head;
     head = head -> getNext();
-    //delete temp //can't figure out how to delete without segfault
+    delete temp; //can't figure out how to delete without segfault
     return true;
   }
+  //
   if (head -> getNext() == NULL) {
     return false;
   }
   if (head -> getNext() -> getStudent() -> getId() == id) {
-    //Node* temp = head -> getNext();
+    Node* temp = head -> getNext();
     head -> setNext(head -> getNext() -> getNext());
-    //delete temp // can't figure out how to delete without segfault
+    delete temp; // can't figure out how to delete without segfault
     return true;
   }
   Node* next = head -> getNext();
@@ -141,6 +148,7 @@ void printAvg(Node* head) {
 }
 
 void addNode(Node* &head, Student* s) {
+  cout << s << endl;
   if (head == NULL) {
     head = new Node(s);
     return;

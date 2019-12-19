@@ -40,5 +40,6 @@ float Student::getGpa() {
 
 //Destructor
 Student::~Student() {
+  cout << "hello" << endl;
   //Nothing to delete (char could be constants)
 }
