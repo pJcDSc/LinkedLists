@@ -1,0 +1,44 @@
+/*
+Author: Peter Jin
+Date: 12/3/2019
+Student Class header
+*/
+
+#include <iostream>
+#include <cstring>
+#include "student.h"
+
+using namespace std;
+
+//Constructor
+student::student(char* first, char* last, int id, float gpa) {
+  firstName = first;
+  lastName = last;
+  this -> id = id;
+  this -> gpa = gpa;
+}
+
+//Get first name
+char* student::getFirstName() {
+  return firstName;
+}
+
+//Get last name
+char* student::getLastName() {
+  return lastName;
+}
+
+//Get id
+int student::getId() {
+  return id;
+}
+
+//Get gpa
+float student::getGpa() {
+  return gpa;
+}
+
+//Destructor
+student::~student() {
+  //Nothing to delete (char could be constants)
+}
