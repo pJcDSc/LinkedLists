@@ -1,0 +1,32 @@
+/*
+Author: Peter Jin
+Date: 12/22/19
+Node cpp class to test whether its node.o's fault
+(Not compiled unless for debug purposes)
+*/
+
+#include <iostream>
+#include "node.h"
+
+Node::Node(Student* s) {
+  student = s;
+  next = NULL;
+}
+
+Node::~Node() {
+  cout << "Node deconstructor call" << endl;
+  if(student) delete student;
+}
+
+Node* Node::getNext() {
+  return next;
+}
+
+Student* Node::getStudent() {
+  return student;
+}
+
+void Node::setNext(Node* n) {
+  next = n;
+}
+

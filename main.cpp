@@ -57,6 +57,10 @@ bool parse(char* input, Node* &head) {
   } else if (strcmp(input, "delete") == 0) {
     del(head);
   } else if (strcmp(input, "print") == 0) {
+    if (head == NULL) {
+      cout << "Student list is empty" << endl;
+      return true;
+    }
     print(head);
   } else if (strcmp(input, "average") == 0) {
     printAvg(head);
@@ -100,36 +104,6 @@ void del(Node* &head) {
   else cout << "Student not found" << endl;
 }
 
-bool delNode(Node* &head, int id) {
-  cout << "new" << endl;
-  cout << head << endl;
-  cout << head -> getNext() << endl;
-						
-  //only if list is empty
-  if (head == NULL) {
-    return false;
-  }
-  //only if actual head contains student to delete
-  if (head -> getStudent() -> getId() == id) {
-    Node* temp = head;
-    head = head -> getNext();
-    delete temp; //can't figure out how to delete without segfault
-    return true;
-  }
-  //
-  if (head -> getNext() == NULL) {
-    return false;
-  }
-  if (head -> getNext() -> getStudent() -> getId() == id) {
-    Node* temp = head -> getNext();
-    head -> setNext(head -> getNext() -> getNext());
-    delete temp; // can't figure out how to delete without segfault
-    return true;
-  }
-  Node* next = head -> getNext();
-  return delNode(next, id);
-}
-
 void print(Node* head) {
   if (head == NULL) return;
   printStudent(head -> getStudent());
@@ -144,13 +118,28 @@ void printStudent(Student* s) {
 }
 
 void printAvg(Node* head) {
+  if (head == NULL) {
+    cout << "Student list is empty" << endl;
+  }
+  float tot;
+  int ct;
+  while (head != NULL) {
+    tot += head -> getStudent() -> getGpa();
+    ct ++;
+  }
 
+  cout << "Average gpa is " << tot/ct << "." << endl;
 }
 
 void addNode(Node* &head, Student* s) {
-  cout << s << endl;
   if (head == NULL) {
     head = new Node(s);
+    return;
+  }
+  if (head -> getStudent() -> getId() > s -> getId()) {
+    Node* temp = head;
+    head = new Node(s);
+    head -> setNext(temp);
     return;
   }
   if (head -> getNext() == NULL) {
@@ -158,6 +147,36 @@ void addNode(Node* &head, Student* s) {
     head -> setNext(temp);
     return;
   }
+  if (head -> getNext() -> getStudent() -> getId() > s -> getId()) {
+    Node* temp = new Node(s);
+    temp -> setNext(head -> getNext());
+    head -> setNext(temp);
+    return;
+  }
   Node* next = head->getNext();
   addNode(next, s);
+}
+
+bool delNode(Node* &head, int id) {
+  if (head == NULL) {
+    return false;
+  }
+  if (head -> getStudent() -> getId() == id) {
+    Node* temp = head;
+    cout << temp << endl;
+    head = head -> getNext();
+    delete temp;
+    return true;
+  }
+  if (head -> getNext() == NULL) {
+    return false;
+  }
+  if (head -> getNext() -> getStudent() -> getId() == id) {
+    Node* temp = head -> getNext();
+    head -> setNext(head -> getNext() -> getNext());
+    delete temp;
+    return true;
+  }
+  Node* next = head -> getNext();
+  return delNode(next, id);
 }
