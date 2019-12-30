@@ -163,7 +163,6 @@ bool delNode(Node* &head, int id) {
   }
   if (head -> getStudent() -> getId() == id) {
     Node* temp = head;
-    cout << temp << endl;
     head = head -> getNext();
     delete temp;
     return true;
